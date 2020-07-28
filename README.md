@@ -1,4 +1,4 @@
-# react-redux-course
+# react-redux-basic-course
 Youtube course from The Net Ninja channel
 
 
