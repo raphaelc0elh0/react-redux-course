@@ -1,37 +1,26 @@
 import React, { Component } from 'react'
-import Todos from './components/Todos'
-import AddTodoForm from './components/AddTodoForm'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import Navbar from './components/Navbar'
+
+import Home from './components/Home';
+import About from './components/About';
+import Contact from './components/Contact';
+import Post from './components/Post';
 
 export default class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      todos: [
-        { id: 1, content: 'buy some milk' },
-        { id: 2, content: 'play mario kart' }
-      ]
-    }
-  }
-
-  deleteTodo = (id) => {
-    const todos = this.state.todos.filter(todo => todo.id !== id);
-    this.setState({ todos: todos })
-  }
-
-  addTodo = (todo) => {
-    todo.id = Math.random();
-    let todos = [...this.state.todos, todo];
-    this.setState({todos: todos})
-  }
-
   render() {
-    const { todos } = this.state
     return (
-      <div className="todo-app container">
-        <h1 className="center blue-text">Todo's</h1>
-        <Todos todos={todos} deleteTodo={this.deleteTodo} />
-        <AddTodoForm addTodo={this.addTodo} />
-      </div>
+      <BrowserRouter>
+        <div className="container">
+          <Navbar />
+          <Switch>
+            <Route exact path='/' component={Home} />
+            <Route path='/about' component={About} />
+            <Route path='/contact' component={Contact} />
+            <Route path="/:post_id" component={Post} />
+          </Switch>
+        </div>
+      </BrowserRouter>
     )
   }
 }
